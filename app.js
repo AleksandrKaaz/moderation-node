@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
+var bodyParser = require("body-parser");
 const { announcements1 } = require("./mock1");
 const { announcements2 } = require("./mock2");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+var jsonParser = bodyParser.json();
 
 const PORT = process.env.PORT || 8082;
 
@@ -24,6 +27,6 @@ app.get("/announcements", (request, response) => {
   }
 });
 
-app.post("/announcements", (request, response) => {
+app.post("/announcements", jsonParser, (request, response) => {
   response.send("ok");
 });
